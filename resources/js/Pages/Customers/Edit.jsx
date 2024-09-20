@@ -2,25 +2,25 @@ import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
 
-export default function Edit({ auth, sweet }) {
+export default function Edit({ auth, customer }) {
     const { data, setData, put, processing, errors } = useForm({
-        name: sweet.name,
-        description: sweet.description,
-        price: sweet.price,
-        stock: sweet.stock,
+        name: customer.name,
+        email: customer.email,
+        phone: customer.phone,
+        preferences: customer.preferences,
     });
 
     const submit = (e) => {
         e.preventDefault();
-        put(`/sweets/${sweet.id}`);
+        put(`/customers/${customer.id}`);
     };
 
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Edit Sweet</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Edit Customer</h2>}
         >
-            <Head title="Edit Sweet" />
+            <Head title="Edit Customer" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -40,43 +40,42 @@ export default function Edit({ auth, sweet }) {
                                 </div>
 
                                 <div className="mb-4">
-                                    <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
+                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        value={data.email}
+                                        onChange={(e) => setData('email', e.target.value)}
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                    />
+                                    {errors.email && <div className="text-red-500 mt-2">{errors.email}</div>}
+                                </div>
+
+                                <div className="mb-4">
+                                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone</label>
+                                    <input
+                                        type="text"
+                                        id="phone"
+                                        value={data.phone}
+                                        onChange={(e) => setData('phone', e.target.value)}
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                    />
+                                    {errors.phone && <div className="text-red-500 mt-2">{errors.phone}</div>}
+                                </div>
+
+                                <div className="mb-4">
+                                    <label htmlFor="preferences" className="block text-sm font-medium text-gray-700">Preferences</label>
                                     <textarea
-                                        id="description"
-                                        value={data.description}
-                                        onChange={(e) => setData('description', e.target.value)}
+                                        id="preferences"
+                                        value={data.preferences}
+                                        onChange={(e) => setData('preferences', e.target.value)}
                                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                     ></textarea>
-                                    {errors.description && <div className="text-red-500 mt-2">{errors.description}</div>}
-                                </div>
-
-                                <div className="mb-4">
-                                    <label htmlFor="price" className="block text-sm font-medium text-gray-700">Price</label>
-                                    <input
-                                        type="number"
-                                        step="0.01"
-                                        id="price"
-                                        value={data.price}
-                                        onChange={(e) => setData('price', e.target.value)}
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                    />
-                                    {errors.price && <div className="text-red-500 mt-2">{errors.price}</div>}
-                                </div>
-
-                                <div className="mb-4">
-                                    <label htmlFor="stock" className="block text-sm font-medium text-gray-700">Stock</label>
-                                    <input
-                                        type="number"
-                                        id="stock"
-                                        value={data.stock}
-                                        onChange={(e) => setData('stock', e.target.value)}
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                    />
-                                    {errors.stock && <div className="text-red-500 mt-2">{errors.stock}</div>}
+                                    {errors.preferences && <div className="text-red-500 mt-2">{errors.preferences}</div>}
                                 </div>
 
                                 <button type="submit" disabled={processing} className="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">
-                                    Update Sweet
+                                    Update Customer
                                 </button>
                             </form>
                         </div>
