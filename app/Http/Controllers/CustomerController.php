@@ -35,7 +35,9 @@ class CustomerController extends Controller
 
     public function show(Customer $customer)
     {
-        $customer->load('orders');
+        $customer->load(['orders' => function ($query) {
+            $query->with('sweets')->latest();
+        }]);
         return Inertia::render('Customers/Show', ['customer' => $customer]);
     }
 
