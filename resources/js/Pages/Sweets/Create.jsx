@@ -14,7 +14,7 @@ export default function Create({ auth }) {
         e.preventDefault();
         console.log('Submitting sweet data:', data);
         try {
-            post(route('sweets.store'));
+            post('/sweets'); // Changed from route('sweets.store') to '/sweets'
         } catch (error) {
             console.error('Sweet submission error:', error);
         }
