@@ -14,7 +14,7 @@ export default function Index({ auth, customers }) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
-                            <Link href={route('customers.create')} className="btn-primary mb-4">Create New Customer</Link>
+                            <Link href="/customers/create" className="btn-primary mb-4">Create New Customer</Link>
                             <table className="min-w-full divide-y divide-gray-200">
                                 <thead className="bg-gray-50">
                                     <tr>
@@ -31,8 +31,8 @@ export default function Index({ auth, customers }) {
                                             <td className="px-6 py-4 whitespace-nowrap">{customer.email}</td>
                                             <td className="px-6 py-4 whitespace-nowrap">{customer.phone}</td>
                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                <Link href={route('customers.edit', customer.id)} className="text-indigo-600 hover:text-indigo-900 mr-2">Edit</Link>
-                                                <Link href={route('customers.show', customer.id)} className="text-indigo-600 hover:text-indigo-900">View</Link>
+                                                <Link href={`/customers/${customer.id}/edit`} className="text-indigo-600 hover:text-indigo-900 mr-2">Edit</Link>
+                                                <Link href={`/customers/${customer.id}`} className="text-indigo-600 hover:text-indigo-900">View</Link>
                                             </td>
                                         </tr>
                                     ))}

@@ -13,7 +13,7 @@ export default function Create({ auth }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route('customers.store'));
+        post('/customers'); // Changed from route('customers.store') to '/customers'
     };
 
     return (

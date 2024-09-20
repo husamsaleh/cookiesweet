@@ -7,7 +7,7 @@
     },
     "devDependencies": {
         "@headlessui/react": "^1.4.2",
-        "@inertiajs/react": "^1.0.0",
+        "@inertiajs/react": "^1.2.0",
         "@tailwindcss/forms": "^0.5.3",
         "@vitejs/plugin-react": "^4.2.0",
         "autoprefixer": "^10.4.12",
@@ -20,6 +20,7 @@
         "vite": "^5.0.0"
     },
     "dependencies": {
+        "@inertiajs/progress": "^0.2.7",
         "chart.js": "^4.4.4",
         "react-chartjs-2": "^5.2.0"
     }

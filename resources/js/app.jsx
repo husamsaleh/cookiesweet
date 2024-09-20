@@ -10,8 +10,15 @@ const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
-    resolve: (name) => resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob('./Pages/**/*.jsx')),
+    resolve: (name) => {
+        console.log('Resolving page:', name);
+        const page = resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob('./Pages/**/*.jsx'));
+        console.log('Resolved page:', page);
+        return page;
+    },
     setup({ el, App, props }) {
+        console.log('Setting up app with props:', props);
+        console.log('Rendering into element:', el);
         const root = createRoot(el);
         root.render(
             <React.StrictMode>

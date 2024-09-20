@@ -48,17 +48,17 @@ export default function Dashboard({ auth, totalSales, pendingOrders, lowStockSwe
                                 <h3 className="text-lg font-semibold mb-4">Admin Functions</h3>
                                 <ul className="space-y-2">
                                     <li>
-                                        <Link href={route('sweets.index')} className="text-blue-600 hover:underline">
+                                        <Link href="/sweets" className="text-blue-600 hover:underline">
                                             Manage Sweets
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href={route('orders.index')} className="text-blue-600 hover:underline">
+                                        <Link href="/orders" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                             Manage Orders
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href={route('customers.index')} className="text-blue-600 hover:underline">
+                                        <Link href="/customers" className="text-blue-600 hover:underline">
                                             Manage Customers
                                         </Link>
                                     </li>

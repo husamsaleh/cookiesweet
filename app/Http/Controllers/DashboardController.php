@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
-use Inertia\Response;
 use App\Models\Order;
 use App\Models\Sweet;
 use App\Models\Customer;
 
 class DashboardController extends Controller
 {
-    public function index(): Response
+    public function index()
     {
         $totalSales = Order::sum('total_amount');
         $pendingOrders = Order::where('status', 'pending')->count();
