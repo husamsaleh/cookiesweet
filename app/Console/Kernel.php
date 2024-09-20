@@ -12,7 +12,17 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        // Schedule daily database backups using mysqldump or a preferred method
+        $schedule->exec('mysqldump -u your_username -p your_database > /path_to_backup/backup_$(date +\%F).sql')
+                 ->daily()
+                 ->onSuccess(function () {
+                     \Log::info('Daily database backup completed successfully.');
+                 })
+                 ->onFailure(function () {
+                     \Log::error('Daily database backup failed.');
+                 });
+
+        // Other scheduled tasks...
     }
 
     /**
