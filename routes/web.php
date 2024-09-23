@@ -52,4 +52,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
 });
 
+Route::resource('orders', OrderController::class);
+
 require __DIR__.'/auth.php';

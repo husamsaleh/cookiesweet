@@ -82,4 +82,47 @@ class OrderController extends Controller
 
         return redirect()->route('orders.index')->with('success', 'Order created successfully.');
     }
+
+    public function edit($id)
+    {
+        $order = Order::with('customer', 'sweets')->findOrFail($id);
+        return Inertia::render('Orders/Edit', [
+            'order' => $order,
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'customer_id' => 'required|exists:customers,id',
+            'sweets' => 'required|array',
+            'sweets.*.id' => 'required|exists:sweets,id',
+            'sweets.*.quantity' => 'required|integer|min:1',
+            'special_requests' => 'nullable|string',
+        ]);
+
+        $order = Order::findOrFail($id);
+
+        // Update order details
+        $order->customer_id = $validated['customer_id'];
+        $order->special_requests = $validated['special_requests'] ?? null;
+
+        // Calculate total amount
+        $totalAmount = 0;
+        foreach ($validated['sweets'] as $sweet) {
+            $sweetModel = Sweet::find($sweet['id']);
+            $totalAmount += $sweetModel->price * $sweet['quantity'];
+        }
+        $order->total_amount = $totalAmount;
+
+        $order->save();
+
+        // Sync sweets with order
+        $order->sweets()->sync([]);
+        foreach ($validated['sweets'] as $sweet) {
+            $order->sweets()->attach($sweet['id'], ['quantity' => $sweet['quantity']]);
+        }
+
+        return redirect()->route('orders.index')->with('success', 'Order updated successfully.');
+    }
 }

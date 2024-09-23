@@ -19,7 +19,7 @@ export default function Index({ auth, orders }) {
                                 <h3 className="text-lg font-semibold mb-4">Create New Order</h3>
                                 <div className="space-x-4">
                                     <Link
-                                        href="/orders/create" // Updated to use hardcoded route
+                                        href="/orders/create"
                                         className="bg-default hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"
                                     >
                                         Create New Order
