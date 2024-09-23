@@ -14,7 +14,7 @@ export default function Index({ auth, customers }) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
-                            <Link href="/customers/create" className="btn-primary mb-4">Create New Customer</Link>
+                            <Link href="/customers/create" className="bg-default hover:bg-orange-700 text-white font-bold py-2 px-4 rounded mb-4">Create New Customer</Link>
                             <table className="min-w-full divide-y divide-gray-200">
                                 <thead className="bg-gray-50">
                                     <tr>

@@ -18,13 +18,13 @@ export default function Create({ auth }) {
                         <div className="space-x-4">
                             <Link
                                 href="/orders/create-existing"
-                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                className="bg-default hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"
                             >
                                 Order with Existing Customer
                             </Link>
                             <Link
                                 href="/orders/create-new"
-                                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                                className="bg-default hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"
                             >
                                 Order with New Customer
                             </Link>

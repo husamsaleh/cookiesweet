@@ -14,12 +14,12 @@ export default function Welcome({ auth, canLogin, canRegister }) {
                 {auth && !auth.user ? (
                     <>
                         {canLogin && (
-                            <Link href="/login" className="mr-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+                            <Link href="/login" className="mr-4 px-4 py-2 bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
                                 Login
                             </Link>
                         )}
                         {canRegister && (
-                            <Link href="/register" className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+                            <Link href="/register" className="px-4 py-2 bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
                                 Register
                             </Link>
                         )}

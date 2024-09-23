@@ -48,17 +48,17 @@ export default function Dashboard({ auth, totalSales, pendingOrders, lowStockSwe
                                 <h3 className="text-lg font-semibold mb-4">Admin Functions</h3>
                                 <ul className="space-y-2">
                                     <li className="mb-2">
-                                        <Link href="/sweets" className="text-white bg-default hover:bg-orange-600 font-bold py-2 px-4 rounded block">
+                                        <Link href="/sweets" className="text-white bg-orange-500 hover:bg-orange-700 font-bold py-2 px-4 rounded block">
                                             Manage Sweets
                                         </Link>
                                     </li>
                                     <li className="mb-2">
-                                        <Link href="/orders" className="text-white bg-default hover:bg-orange-600 font-bold py-2 px-4 rounded block">
+                                        <Link href="/orders" className="text-white bg-orange-500 hover:bg-orange-700 font-bold py-2 px-4 rounded block">
                                             Manage Orders
                                         </Link>
                                     </li>
                                     <li className="mb-2">
-                                        <Link href="/customers" className="text-white bg-default hover:bg-orange-600 font-bold py-2 px-4 rounded block">
+                                        <Link href="/customers" className="text-white bg-orange-500 hover:bg-orange-700 font-bold py-2 px-4 rounded block">
                                             Manage Customers
                                         </Link>
                                     </li>
