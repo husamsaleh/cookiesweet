@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('customer_id')->constrained()->onDelete('cascade');
             $table->decimal('total_amount', 10, 2);
-            $table->enum('status', ['received', 'in_progress', 'completed', 'shipped']);
+            $table->enum('status', ['pending', 'working_on', 'ready_for_delivery', 'delivered']);
             $table->text('special_requests')->nullable();
             $table->timestamps();
         });

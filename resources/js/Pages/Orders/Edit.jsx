@@ -8,6 +8,7 @@ export default function Edit({ auth, order }) {
         customer_id: order.customer_id,
         sweets: order.sweets.map(sweet => ({ id: sweet.id, quantity: sweet.pivot.quantity })),
         special_requests: order.special_requests,
+        status: order.status, // Include status in form data
     });
 
     const [selectedSweets, setSelectedSweets] = useState(data.sweets);
@@ -108,6 +109,25 @@ export default function Edit({ auth, order }) {
                                     value={data.special_requests}
                                     onChange={(e) => setData('special_requests', e.target.value)}
                                 />
+                            </div>
+
+                            {/* Order Status */}
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="status">
+                                    Order Status
+                                </label>
+                                <select
+                                    id="status"
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    value={data.status}
+                                    onChange={(e) => setData('status', e.target.value)}
+                                >
+                                    <option value="pending">Pending</option>
+                                    <option value="working_on">Working On</option>
+                                    <option value="ready_for_delivery">Ready for Delivery</option>
+                                    <option value="delivered">Delivered</option>
+                                </select>
+                                {errors.status && <div className="text-red-500">{errors.status}</div>}
                             </div>
 
                             {errors.error && <div className="text-red-500 mb-4">{errors.error}</div>}

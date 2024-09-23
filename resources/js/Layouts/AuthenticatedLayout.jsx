@@ -3,10 +3,11 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react'; // Import usePage from Inertia
 
 export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
+    const { props } = usePage(); // Use usePage to get props
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -23,6 +24,9 @@ export default function Authenticated({ user, header, children }) {
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink href="/dashboard" active={window.location.pathname === '/dashboard'}>
                                     Dashboard
+                                </NavLink>
+                                <NavLink href="/expenses" active={window.location.pathname.startsWith('/expenses')}>
+                                    Manage Expenses
                                 </NavLink>
                             </div>
                         </div>
@@ -46,7 +50,7 @@ export default function Authenticated({ user, header, children }) {
                                                 >
                                                     <path
                                                         fillRule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 111.414 1.414l-4 4a1 1 01-1.414 0l-4-4a1 1 010-1.414z"
                                                         clipRule="evenodd"
                                                     />
                                                 </svg>
@@ -94,6 +98,9 @@ export default function Authenticated({ user, header, children }) {
                     <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink href="/dashboard" active={window.location.pathname === '/dashboard'}>
                             Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href="/expenses" active={window.location.pathname.startsWith('/expenses')}>
+                            Manage Expenses
                         </ResponsiveNavLink>
                     </div>
 

@@ -8,8 +8,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SweetController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\SettingsController;
 
-// Add this at the top of your routes
 Route::get('/phpinfo', function () {
     return phpinfo();
 });
@@ -32,6 +33,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
+    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+    Route::get('/orders/{order}/edit', [OrderController::class, 'edit'])->name('orders.edit');
+    Route::put('/orders/{order}', [OrderController::class, 'update'])->name('orders.update');
+    Route::delete('/orders/{order}', [OrderController::class, 'destroy'])->name('orders.destroy');
     Route::get('/sweets', [SweetController::class, 'index'])->name('sweets.index');
     Route::get('/sweets/create', [SweetController::class, 'create'])->name('sweets.create');
     Route::post('/sweets', [SweetController::class, 'store'])->name('sweets.store');
@@ -46,10 +52,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/customers/{customer}', [CustomerController::class, 'show'])->name('customers.show');
     Route::delete('/customers/{customer}', [CustomerController::class, 'destroy'])->name('customers.destroy');
     
-    Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
     Route::get('/orders/create-existing', [OrderController::class, 'createExisting'])->name('orders.createExisting');
     Route::get('/orders/create-new', [OrderController::class, 'createNew'])->name('orders.createNew');
-    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+
+    Route::get('/expenses', [ExpenseController::class, 'index'])->name('expenses.index');
+    Route::get('/expenses/create', [ExpenseController::class, 'create'])->name('expenses.create');
+    Route::post('/expenses', [ExpenseController::class, 'store'])->name('expenses.store');
+    Route::get('/expenses/{expense}/edit', [ExpenseController::class, 'edit'])->name('expenses.edit');
+    Route::put('/expenses/{expense}', [ExpenseController::class, 'update'])->name('expenses.update');
+    Route::delete('/expenses/{expense}', [ExpenseController::class, 'destroy'])->name('expenses.destroy');
 });
 
 Route::resource('orders', OrderController::class);

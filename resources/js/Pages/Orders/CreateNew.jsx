@@ -8,6 +8,7 @@ export default function CreateNew({ auth, sweets }) {
         new_customer: {
             name: '',
             email: '',
+            phone: '', 
         },
         sweets: [],
         special_requests: '',
@@ -86,6 +87,22 @@ export default function CreateNew({ auth, sweets }) {
                                 />
                                 {errors.new_customer && errors.new_customer.email && (
                                     <div className="text-red-500">{errors.new_customer.email}</div>
+                                )}
+                            </div>
+
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="new_customer_phone">
+                                    Customer Phone
+                                </label>
+                                <input
+                                    type="tel"
+                                    id="new_customer_phone"
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    value={data.new_customer.phone}
+                                    onChange={(e) => setData('new_customer', { ...data.new_customer, phone: e.target.value })}
+                                />
+                                {errors.new_customer && errors.new_customer.phone && (
+                                    <div className="text-red-500">{errors.new_customer.phone}</div>
                                 )}
                             </div>
 

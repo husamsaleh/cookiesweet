@@ -10,11 +10,38 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::with('customer')->latest()->get();
+        \Log::info('Received filters:', ['date' => $request->filter, 'status' => $request->statusFilter]);
+        
+        $query = Order::with('customer')->latest();
+
+        // Apply date filter
+        switch ($request->filter) {
+            case 'today':
+                $query->whereDate('created_at', today());
+                break;
+            case 'this_week':
+                $query->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()]);
+                break;
+            case 'this_month':
+                $query->whereMonth('created_at', now()->month)->whereYear('created_at', now()->year);
+                break;
+        }
+
+        // Apply status filter
+        if ($request->statusFilter && $request->statusFilter !== 'all') {
+            $query->where('status', $request->statusFilter);
+        }
+
+        $orders = $query->get();
+
+        \Log::info('Filtered orders count:', ['count' => $orders->count()]);
+
         return Inertia::render('Orders/Index', [
-            'orders' => $orders
+            'orders' => $orders,
+            'filter' => $request->filter ?? 'all',
+            'statusFilter' => $request->statusFilter ?? 'all'
         ]);
     }
 
@@ -48,6 +75,7 @@ class OrderController extends Controller
             'new_customer' => 'required_without:customer_id|array',
             'new_customer.name' => 'required_with:new_customer|string|max:255',
             'new_customer.email' => 'required_with:new_customer|email|unique:customers,email',
+            'new_customer.phone' => 'nullable|string|max:20', // Add this line
             'sweets' => 'required|array',
             'sweets.*.id' => 'required|exists:sweets,id',
             'sweets.*.quantity' => 'required|integer|min:1',
@@ -71,7 +99,7 @@ class OrderController extends Controller
         $order = Order::create([
             'customer_id' => $validated['customer_id'],
             'total_amount' => $totalAmount,
-            'status' => 'received',
+            'status' => 'pending',
             'special_requests' => $validated['special_requests'] ?? null,
         ]);
 
@@ -99,6 +127,7 @@ class OrderController extends Controller
             'sweets.*.id' => 'required|exists:sweets,id',
             'sweets.*.quantity' => 'required|integer|min:1',
             'special_requests' => 'nullable|string',
+            'status' => 'required|in:pending,working_on,ready_for_delivery,delivered', // Ensure status validation matches the allowed values
         ]);
 
         $order = Order::findOrFail($id);
@@ -106,6 +135,7 @@ class OrderController extends Controller
         // Update order details
         $order->customer_id = $validated['customer_id'];
         $order->special_requests = $validated['special_requests'] ?? null;
+        $order->status = $validated['status']; // Update status
 
         // Calculate total amount
         $totalAmount = 0;

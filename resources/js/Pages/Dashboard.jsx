@@ -1,7 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 
-export default function Dashboard({ auth, totalSales, pendingOrders, lowStockSweets, totalCustomers }) {
+export default function Dashboard({ auth, totalSales, pendingOrders, lowStockSweets, totalCustomers, workingOnOrders, readyForDeliveryOrders, deliveredOrders }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -23,8 +23,16 @@ export default function Dashboard({ auth, totalSales, pendingOrders, lowStockSwe
                                 <p className="text-xl">{pendingOrders}</p>
                             </div>
                             <div className="p-4 bg-white shadow rounded border-default">
-                                <h3 className="text-lg font-semibold">Total Customers</h3>
-                                <p className="text-xl">{totalCustomers}</p>
+                                <h3 className="text-lg font-semibold">Working On Orders</h3>
+                                <p className="text-xl">{workingOnOrders}</p>
+                            </div>
+                            <div className="p-4 bg-white shadow rounded border-default">
+                                <h3 className="text-lg font-semibold">Ready for Delivery Orders</h3>
+                                <p className="text-xl">{readyForDeliveryOrders}</p>
+                            </div>
+                            <div className="p-4 bg-white shadow rounded border-default">
+                                <h3 className="text-lg font-semibold">Delivered Orders</h3>
+                                <p className="text-xl">{deliveredOrders}</p>
                             </div>
                             <div className="p-4 bg-white shadow rounded border-default">
                                 <h3 className="text-lg font-semibold text-red-600">Low Stock Alerts</h3>
@@ -60,6 +68,11 @@ export default function Dashboard({ auth, totalSales, pendingOrders, lowStockSwe
                                     <li className="mb-2">
                                         <Link href="/customers" className="text-white bg-orange-500 hover:bg-orange-700 font-bold py-2 px-4 rounded block">
                                             Manage Customers
+                                        </Link>
+                                    </li>
+                                    <li className="mb-2">
+                                        <Link href="/expenses" className="text-white bg-orange-500 hover:bg-orange-700 font-bold py-2 px-4 rounded block">
+                                            Manage Expenses
                                         </Link>
                                     </li>
                                 </ul>
