@@ -17,13 +17,13 @@ export default function Create({ auth }) {
                         <h3 className="text-lg font-semibold mb-4">Choose Order Type</h3>
                         <div className="space-x-4">
                             <Link
-                                href={route('orders.createExisting')}
+                                href="/orders/createExisting" // Updated to use hardcoded route
                                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                             >
                                 Order with Existing Customer
                             </Link>
                             <Link
-                                href={route('orders.createNew')}
+                                href="/orders/createNew" // Updated to use hardcoded route
                                 className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
                             >
                                 Order with New Customer

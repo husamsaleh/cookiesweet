@@ -45,6 +45,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/customers/{customer}', [CustomerController::class, 'update'])->name('customers.update');
     Route::get('/customers/{customer}', [CustomerController::class, 'show'])->name('customers.show');
     Route::delete('/customers/{customer}', [CustomerController::class, 'destroy'])->name('customers.destroy');
+    
+    Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
+    Route::get('/orders/create-existing', [OrderController::class, 'createExisting'])->name('orders.createExisting');
+    Route::get('/orders/create-new', [OrderController::class, 'createNew'])->name('orders.createNew');
+    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
 });
 
 require __DIR__.'/auth.php';

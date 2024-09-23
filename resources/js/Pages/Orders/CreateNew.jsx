@@ -35,7 +35,7 @@ export default function CreateNew({ auth, sweets }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route('orders.store'));
+        post('/orders'); // Updated to use hardcoded route
     };
 
     return (
