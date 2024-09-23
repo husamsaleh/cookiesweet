@@ -44,8 +44,12 @@ export default function Index({ auth, sweets }) {
                                             <td className="px-6 py-4 whitespace-nowrap">${sweet.price}</td>
                                             <td className="px-6 py-4 whitespace-nowrap">{sweet.stock}</td>
                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                <Link href={`/sweets/${sweet.id}/edit`} className="text-indigo-600 hover:text-indigo-900 mr-2">Edit</Link>
-                                                <button onClick={() => deleteSweet(sweet.id)} className="text-red-600 hover:text-red-900">Delete</button>
+                                                <Link href={`/sweets/${sweet.id}/edit`} className="text-indigo-600 hover:text-indigo-900 mr-2">
+                                                    <i className="fas fa-edit"></i>
+                                                </Link>
+                                                <button onClick={() => deleteSweet(sweet.id)} className="text-red-600 hover:text-red-900">
+                                                    <i className="fas fa-trash"></i>
+                                                </button>
                                             </td>
                                         </tr>
                                     ))}

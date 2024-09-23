@@ -44,7 +44,14 @@ export default function Index({ auth, orders }) {
                                                 <td className="px-6 py-4 whitespace-nowrap">{order.id}</td>
                                                 <td className="px-6 py-4 whitespace-nowrap">{order.customer.name}</td>
                                                 <td className="px-6 py-4 whitespace-nowrap">${order.total_amount}</td>
-                                                <td className="px-6 py-4 whitespace-nowrap">{order.status}</td>
+                                                <td className="px-6 py-4 whitespace-nowrap">
+                                                    <Link href={`/orders/${order.id}/edit`} className="text-indigo-600 hover:text-indigo-900 mr-2">
+                                                        <i className="fas fa-edit"></i>
+                                                    </Link>
+                                                    <button onClick={() => deleteOrder(order.id)} className="text-red-600 hover:text-red-900">
+                                                        <i className="fas fa-trash"></i>
+                                                    </button>
+                                                </td>
                                             </tr>
                                         ))}
                                     </tbody>

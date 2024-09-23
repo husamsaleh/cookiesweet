@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bg-default {
+    @apply bg-orange-500;
+}
+
+.border-default {
+    @apply border-orange-500;
+}

@@ -14,19 +14,19 @@ export default function Dashboard({ auth, totalSales, pendingOrders, lowStockSwe
                     <div className="grid grid-cols-1 gap-6 mb-6">
                         {/* Key Metrics */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                            <div className="p-4 bg-white shadow rounded">
+                            <div className="p-4 bg-white shadow rounded border-default">
                                 <h3 className="text-lg font-semibold">Total Sales</h3>
                                 <p className="text-xl">${totalSales}</p>
                             </div>
-                            <div className="p-4 bg-white shadow rounded">
+                            <div className="p-4 bg-white shadow rounded border-default">
                                 <h3 className="text-lg font-semibold">Pending Orders</h3>
                                 <p className="text-xl">{pendingOrders}</p>
                             </div>
-                            <div className="p-4 bg-white shadow rounded">
+                            <div className="p-4 bg-white shadow rounded border-default">
                                 <h3 className="text-lg font-semibold">Total Customers</h3>
                                 <p className="text-xl">{totalCustomers}</p>
                             </div>
-                            <div className="p-4 bg-white shadow rounded">
+                            <div className="p-4 bg-white shadow rounded border-default">
                                 <h3 className="text-lg font-semibold text-red-600">Low Stock Alerts</h3>
                                 {lowStockSweets.length > 0 ? (
                                     <ul>
@@ -43,22 +43,22 @@ export default function Dashboard({ auth, totalSales, pendingOrders, lowStockSwe
                         </div>
 
                         {/* Additional Dashboard Content */}
-                        <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg border-default">
                             <div className="p-6 text-gray-900">
                                 <h3 className="text-lg font-semibold mb-4">Admin Functions</h3>
                                 <ul className="space-y-2">
-                                    <li>
-                                        <Link href="/sweets" className="text-blue-600 hover:underline">
+                                    <li className="mb-2">
+                                        <Link href="/sweets" className="text-white bg-default hover:bg-orange-600 font-bold py-2 px-4 rounded block">
                                             Manage Sweets
                                         </Link>
                                     </li>
-                                    <li>
-                                        <Link href="/orders" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                    <li className="mb-2">
+                                        <Link href="/orders" className="text-white bg-default hover:bg-orange-600 font-bold py-2 px-4 rounded block">
                                             Manage Orders
                                         </Link>
                                     </li>
-                                    <li>
-                                        <Link href="/customers" className="text-blue-600 hover:underline">
+                                    <li className="mb-2">
+                                        <Link href="/customers" className="text-white bg-default hover:bg-orange-600 font-bold py-2 px-4 rounded block">
                                             Manage Customers
                                         </Link>
                                     </li>

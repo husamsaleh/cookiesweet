@@ -31,8 +31,15 @@ export default function Index({ auth, customers }) {
                                             <td className="px-6 py-4 whitespace-nowrap">{customer.email}</td>
                                             <td className="px-6 py-4 whitespace-nowrap">{customer.phone}</td>
                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                <Link href={`/customers/${customer.id}/edit`} className="text-indigo-600 hover:text-indigo-900 mr-2">Edit</Link>
-                                                <Link href={`/customers/${customer.id}`} className="text-indigo-600 hover:text-indigo-900">View</Link>
+                                                <Link href={`/customers/${customer.id}/edit`} className="text-indigo-600 hover:text-indigo-900 mr-2">
+                                                    <i className="fas fa-edit"></i>
+                                                </Link>
+                                                <Link href={`/customers/${customer.id}`} className="text-indigo-600 hover:text-indigo-900 mr-2">
+                                                    <i className="fas fa-eye"></i>
+                                                </Link>
+                                                <button onClick={() => deleteCustomer(customer.id)} className="text-red-600 hover:text-red-900">
+                                                    <i className="fas fa-trash"></i>
+                                                </button>
                                             </td>
                                         </tr>
                                     ))}

@@ -15,6 +15,14 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'background': {
+                    DEFAULT: '#F97316', // This is the hex value for bg-orange-500
+                },
+            },
+            borderColor: {
+                DEFAULT: '#F97316', // This is the hex value for border-orange-500
+            },
         },
     },
 
