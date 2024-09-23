@@ -32,7 +32,7 @@ export default function CreateExisting({ auth, customers, sweets }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post('/orders'); // Updated to use hardcoded route
+        post('/orders');
     };
 
     return (

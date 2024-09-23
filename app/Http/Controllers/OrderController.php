@@ -20,10 +20,23 @@ class OrderController extends Controller
 
     public function create()
     {
+        return Inertia::render('Orders/Create');
+    }
+
+    public function createExisting()
+    {
         $customers = Customer::all();
         $sweets = Sweet::all();
-        return Inertia::render('Orders/Create', [
+        return Inertia::render('Orders/CreateExisting', [
             'customers' => $customers,
+            'sweets' => $sweets,
+        ]);
+    }
+
+    public function createNew()
+    {
+        $sweets = Sweet::all();
+        return Inertia::render('Orders/CreateNew', [
             'sweets' => $sweets,
         ]);
     }
