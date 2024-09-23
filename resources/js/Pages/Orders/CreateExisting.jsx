@@ -11,6 +11,7 @@ export default function CreateExisting({ auth, customers, sweets }) {
     });
 
     const [selectedSweets, setSelectedSweets] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
 
     const handleSweetChange = (sweetId, quantity) => {
         const updatedSweets = [...selectedSweets];
@@ -28,6 +29,13 @@ export default function CreateExisting({ auth, customers, sweets }) {
 
         setSelectedSweets(updatedSweets);
         setData('sweets', updatedSweets);
+
+        // Calculate total price
+        const newTotalPrice = updatedSweets.reduce((total, sweet) => {
+            const sweetData = sweets.find(s => s.id === sweet.id);
+            return total + (sweetData.price * sweet.quantity);
+        }, 0);
+        setTotalPrice(newTotalPrice);
     };
 
     const handleSubmit = (e) => {
@@ -71,7 +79,7 @@ export default function CreateExisting({ auth, customers, sweets }) {
                                 </label>
                                 {sweets.map(sweet => (
                                     <div key={sweet.id} className="flex items-center mb-2">
-                                        <span className="w-1/2">{sweet.name}</span>
+                                        <span className="w-1/2">{sweet.name} - ${sweet.price}</span>
                                         <input
                                             type="number"
                                             min="0"
@@ -82,6 +90,13 @@ export default function CreateExisting({ auth, customers, sweets }) {
                                     </div>
                                 ))}
                                 {errors.sweets && <div className="text-red-500">{errors.sweets}</div>}
+                            </div>
+
+                            {/* Total price */}
+                            <div className="mb-4">
+                                <label className="block text-orange-500 text-sm font-bold mb-2">
+                                    Total Price: ${totalPrice.toFixed(2)}
+                                </label>
                             </div>
 
                             {/* Special requests */}
@@ -103,7 +118,7 @@ export default function CreateExisting({ auth, customers, sweets }) {
                                 <button
                                     type="submit"
                                     disabled={processing}
-                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                    className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"
                                 >
                                     Create Order
                                 </button>

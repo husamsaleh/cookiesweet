@@ -14,6 +14,7 @@ export default function CreateNew({ auth, sweets }) {
     });
 
     const [selectedSweets, setSelectedSweets] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
 
     const handleSweetChange = (sweetId, quantity) => {
         const updatedSweets = [...selectedSweets];
@@ -31,6 +32,13 @@ export default function CreateNew({ auth, sweets }) {
 
         setSelectedSweets(updatedSweets);
         setData('sweets', updatedSweets);
+
+        // Calculate total price
+        const newTotalPrice = updatedSweets.reduce((total, sweet) => {
+            const sweetData = sweets.find(s => s.id === sweet.id);
+            return total + (sweetData.price * sweet.quantity);
+        }, 0);
+        setTotalPrice(newTotalPrice);
     };
 
     const handleSubmit = (e) => {
@@ -58,7 +66,7 @@ export default function CreateNew({ auth, sweets }) {
                                     id="new_customer_name"
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     value={data.new_customer.name}
-                                    onChange={(e) => setData('new_customer.name', e.target.value)}
+                                    onChange={(e) => setData('new_customer', { ...data.new_customer, name: e.target.value })}
                                 />
                                 {errors.new_customer && errors.new_customer.name && (
                                     <div className="text-red-500">{errors.new_customer.name}</div>
@@ -74,7 +82,7 @@ export default function CreateNew({ auth, sweets }) {
                                     id="new_customer_email"
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     value={data.new_customer.email}
-                                    onChange={(e) => setData('new_customer.email', e.target.value)}
+                                    onChange={(e) => setData('new_customer', { ...data.new_customer, email: e.target.value })}
                                 />
                                 {errors.new_customer && errors.new_customer.email && (
                                     <div className="text-red-500">{errors.new_customer.email}</div>
@@ -88,7 +96,7 @@ export default function CreateNew({ auth, sweets }) {
                                 </label>
                                 {sweets.map(sweet => (
                                     <div key={sweet.id} className="flex items-center mb-2">
-                                        <span className="w-1/2">{sweet.name}</span>
+                                        <span className="w-1/2">{sweet.name} - ${sweet.price}</span>
                                         <input
                                             type="number"
                                             min="0"
@@ -99,6 +107,13 @@ export default function CreateNew({ auth, sweets }) {
                                     </div>
                                 ))}
                                 {errors.sweets && <div className="text-red-500">{errors.sweets}</div>}
+                            </div>
+
+                            {/* Total price */}
+                            <div className="mb-4">
+                                <label className="block text-orange-500 text-sm font-bold mb-2">
+                                    Total Price: ${totalPrice.toFixed(2)}
+                                </label>
                             </div>
 
                             {/* Special requests */}
@@ -118,7 +133,7 @@ export default function CreateNew({ auth, sweets }) {
 
                             <div className="flex items-center justify-between">
                                 <button
-                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                    className="bg-default hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                     type="submit"
                                     disabled={processing}
                                 >
