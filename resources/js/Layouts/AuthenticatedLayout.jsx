@@ -1,13 +1,38 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import { Link, usePage } from '@inertiajs/react'; // Import usePage from Inertia
+import { Link, usePage } from '@inertiajs/react';
+import localesEn from '@/lang/en.json';
+import localesAr from '@/lang/ar.json';
+
+// Mapping of locales to their respective translation files
+const localesMap = {
+    en: localesEn,
+    ar: localesAr,
+};
 
 export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
-    const { props } = usePage(); // Use usePage to get props
+    const { props } = usePage(); // Get locales and current locale from props
+    const { locales, currentLocale } = props;
+
+    // State to hold the translations
+    const [translations, setTranslations] = useState({});
+
+    // Load the appropriate language file based on the current locale
+    useEffect(() => {
+        setTranslations(localesMap[currentLocale]);
+    }, [currentLocale]);
+
+    // Handle language change
+    const handleLanguageChange = (localeCode) => {
+        const currentPath = window.location.pathname;
+        const newPath = currentPath.replace(/^\/[a-z]{2}/, ''); // Remove current locale
+        const localizedUrl = `/${localeCode}${newPath}`; // Construct new URL
+        window.location.href = localizedUrl; // Redirect to new locale
+    };
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -23,15 +48,30 @@ export default function Authenticated({ user, header, children }) {
 
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink href="/dashboard" active={window.location.pathname === '/dashboard'}>
-                                    Dashboard
+                                    {translations.dashboard} {/* Localized Dashboard */}
                                 </NavLink>
                                 <NavLink href="/expenses" active={window.location.pathname.startsWith('/expenses')}>
-                                    Manage Expenses
+                                    {translations.manageExpenses} {/* Localized Manage Expenses */}
                                 </NavLink>
                             </div>
                         </div>
 
                         <div className="hidden sm:flex sm:items-center sm:ml-6">
+                            {/* Language Switcher */}
+                            <div className="mr-4 flex items-center space-x-4">
+                                {Object.keys(locales).map((localeCode) => (
+                                    <button
+                                        key={localeCode}
+                                        onClick={() => handleLanguageChange(localeCode)}
+                                        className={`${
+                                            currentLocale === localeCode ? 'font-bold' : ''
+                                        } text-gray-600 hover:text-gray-900`}
+                                    >
+                                        {locales[localeCode].native} {/* Language Button */}
+                                    </button>
+                                ))}
+                            </div>
+
                             <div className="ml-3 relative">
                                 <Dropdown>
                                     <Dropdown.Trigger>
@@ -59,9 +99,9 @@ export default function Authenticated({ user, header, children }) {
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
-                                        <Dropdown.Link href="/profile">Profile</Dropdown.Link>
+                                        <Dropdown.Link href="/profile">{translations.profile}</Dropdown.Link> {/* Localized Profile */}
                                         <Dropdown.Link href="/logout" method="post" as="button">
-                                            Log Out
+                                            {translations.logout} {/* Localized Log Out */}
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
@@ -97,10 +137,10 @@ export default function Authenticated({ user, header, children }) {
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink href="/dashboard" active={window.location.pathname === '/dashboard'}>
-                            Dashboard
+                            {translations.dashboard} {/* Localized Dashboard */}
                         </ResponsiveNavLink>
                         <ResponsiveNavLink href="/expenses" active={window.location.pathname.startsWith('/expenses')}>
-                            Manage Expenses
+                            {translations.manageExpenses} {/* Localized Manage Expenses */}
                         </ResponsiveNavLink>
                     </div>
 
@@ -111,9 +151,9 @@ export default function Authenticated({ user, header, children }) {
                         </div>
 
                         <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href="/profile">Profile</ResponsiveNavLink>
+                            <ResponsiveNavLink href="/profile">{translations.profile}</ResponsiveNavLink> {/* Localized Profile */}
                             <ResponsiveNavLink method="post" href="/logout" as="button">
-                                Log Out
+                                {translations.logout} {/* Localized Log Out */}
                             </ResponsiveNavLink>
                         </div>
                     </div>

@@ -1,0 +1,23 @@
+
+{
+    "dashboard": "Dashboard",
+    "manageExpenses": "Manage Expenses",
+    "profile": "Profile",
+    "logout": "Log Out",
+
+    
+        "Total_Sales": "Total Sales",
+        "Pending_Orders": "Pending Orders",
+        "Working_On_Orders": "Working On Orders",
+        "Ready_For_Delivery_Orders": "Ready for Delivery Orders",
+        "Delivered_Orders": "Delivered Orders",
+        "Low_Stock_Alerts": "Low Stock Alerts",
+        "All_Stocks_Sufficient": "All stocks are sufficient.",
+        "Admin_Functions": "Admin Functions",
+        "Manage_Sweets": "Manage Sweets",
+        "Manage_Orders": "Manage Orders",
+        "Manage_Customers": "Manage Customers",
+        "Manage_Expenses": "Manage Expenses"
+    
+    
+}

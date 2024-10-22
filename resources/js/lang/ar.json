@@ -1,0 +1,23 @@
+
+{
+    "dashboard": "لوحة القيادة",
+    "manageExpenses": "إدارة النفقات",
+    "profile": "الملف الشخصي",
+    "logout": "تسجيل الخروج",
+
+
+    "Total_Sales": "إجمالي المبيعات",
+        "Pending_Orders": "الطلبات المعلقة",
+        "Working_On_Orders": "العمل على الطلبات",
+        "Ready_For_Delivery_Orders": "جاهز للتوصيل",
+        "Delivered_Orders": "الطلبات الموصلة",
+        "Low_Stock_Alerts": "تنبيهات المخزون المنخفض",
+        "All_Stocks_Sufficient": "المخزون كافٍ.",
+        "Admin_Functions": "وظائف الإدارة",
+        "Manage_Sweets": "إدارة الحلويات",
+        "Manage_Orders": "إدارة الطلبات",
+        "Manage_Customers": "إدارة العملاء",
+        "Manage_Expenses": "إدارة المصاريف"
+    
+
+}

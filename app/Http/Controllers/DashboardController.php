@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Models\Order;
 use App\Models\Sweet;
 use App\Models\Customer;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class DashboardController extends Controller
 {
@@ -21,6 +22,9 @@ class DashboardController extends Controller
         $totalCustomers = Customer::count();
 
         return Inertia::render('Dashboard', [
+            'user' => auth()->user(),
+            'locales' => LaravelLocalization::getSupportedLocales(),
+            'currentLocale' => LaravelLocalization::getCurrentLocale(),
             'totalSales' => $totalSales,
             'pendingOrders' => $pendingOrders,
             'workingOnOrders' => $workingOnOrders,
