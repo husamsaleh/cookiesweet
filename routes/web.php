@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -10,6 +11,7 @@ use App\Http\Controllers\SweetController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\SettingsController;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::get('/phpinfo', function () {
     return phpinfo();
@@ -27,6 +29,15 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::get('/api/locales', function () {
+    return response()->json(LaravelLocalization::getSupportedLocales());
+});
+
+Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function(){ //...
+   
+
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -66,3 +77,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::resource('orders', OrderController::class);
 
 require __DIR__.'/auth.php';
+
+});
